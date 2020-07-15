@@ -15,9 +15,12 @@ export default {
   },
   methods:{
     onSubmit: function(postData){
-      axios.post('https://summer-nuxt.firebaseio.com/posts.json', postData)
-        .then(result => console.log(result))
-        .catch(e => console.log(e))
+      this.$store.dispatch('addPost', postData)
+        .then(
+          () =>{
+            this.$router.push('/admin')
+          }
+        )
     }
   }
 }

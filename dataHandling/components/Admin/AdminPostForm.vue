@@ -2,8 +2,7 @@
   <form @submit.prevent="onSave">
         <AppControlInput v-model="editedPost.author">Author Name</AppControlInput>
         <AppControlInput v-model="editedPost.title">Title</AppControlInput>
-        <AppControlInput v-model="editedPost.thumbnail">thumbnailLink</AppControlInput>
-        <AppControlInput v-model="editedPost.previewText">previewText</AppControlInput>
+        <AppControlInput v-model="editedPost.thumbnailLink">thumbnailLink</AppControlInput>
         <AppControlInput
         control-type="textarea" 
         v-model="editedPost.content">Content</AppControlInput>
@@ -32,7 +31,6 @@ export default {
         author:'',
         title:'',
         thumbnailLink:'',
-        previewText:'',
         content:''
       }
     }

@@ -98,7 +98,7 @@ const createStore = () => {
           if(!jwtCookie) return
           token = jwtCookie.split('=')[1]
           tokenExpiration = req.headers.cookie.split(';').find(c => c.trim().startsWith("tokenExpiration=")).split('=')[1]
-        }else{
+        }else if(process.client){
           token = localStorage.getItem('token')
           tokenExpiration = localStorage.getItem('tokenExpiration')
           

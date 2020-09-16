@@ -1,83 +1,60 @@
 <template>
-  <div class="single-post-page">
-    <section class="post">
-      <h1 class="post-title">{{ loadedPost.title }}</h1>
-      <div class="post-details">
-        <div class="post-detail">Last update on {{ loadedPost.updatedDate | date }}</div>
-        <div class="post-detail">Writen by {{ loadedPost.author }}</div>
-      </div>
-      <p class="post-content">{{ loadedPost.content }}</p>
+  <div class="home-page">
+    <section class="intro">
+      <h1>Get the latest tech news!</h1>
     </section>
-    <section class="post-feedback">
-      <p>Let me know what you think about the post, send a mail to <a href="mailto:feedback@my-awesome-domain.com">feedback@my-awesome-domain.com</a></p>
-    </section>
+    <PostList :posts="loadedPosts" />
   </div>
 </template>
 
+
 <script>
+import PostList from '@/components/Posts/PostList'
 export default {
-  asyncData(context){
-    return context.app.$axios.$get('/posts/' + context.params.id + '.json')
-      .then(res => {
-        return {
-          loadedPost: res
-        }
-      })
-      .catch(e => context.error(e))
+  // middleware: 'log',
+  components:{
+    PostList
+  },
+  computed:{
+    loadedPosts(){
+      return this.$store.getters.loadedPosts
+    }
   }
 }
 </script>
 
 <style scoped>
-.single-post-page {
+.intro {
+  height: 300px;
+  position: relative;
   padding: 30px;
-  text-align: center;
   box-sizing: border-box;
+  background-image: url('~assets/images/original.jpg');
+  background-position: center;
+  background-size: cover;
 }
 
-.post {
-  width: 100%;
-}
-
-@media (min-width: 768px) {
-  .post {
-    width: 600px;
-    margin: auto;
-  }
-}
-
-.post-title {
-  margin: 0;
-}
-
-.post-details {
+.intro h1 {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  width: 90%;
+  font-size: 1.5rem;
+  color: black;
+  background-color: rgb(211, 211, 211);
   padding: 10px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px black;
   box-sizing: border-box;
-  border-bottom: 3px solid #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  border: 1px solid black;
 }
 
 @media (min-width: 768px) {
-  .post-details {
-    flex-direction: row;
+  .intro h1 {
+    font-size: 2rem;
   }
 }
 
-.post-detail {
-  color: rgb(88, 88, 88);
-  margin: 0 10px;
-}
 
-.post-feedback a {
-  color: red;
-  text-decoration: none;
-}
 
-.post-feedback a:hover,
-.post-feedback a:active {
-  color: salmon;
-}
 </style>
